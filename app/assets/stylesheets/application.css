@@ -17,3 +17,9 @@
  body {
    margin: 0;
  }
+ 
+ li {
+   float: right;
+ }
+ 
+ 

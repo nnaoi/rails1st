@@ -18,8 +18,13 @@
    margin: 0;
  }
  
+ ul {
+   list-style: none;
+ }
+ 
  li {
    float: right;
+   margin: 0 10px;
  }
  
  

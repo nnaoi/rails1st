@@ -13,18 +13,28 @@
  *= require_tree .
  *= require_self
  */
- 
+
  body {
    margin: 0;
  }
  
  ul {
    list-style: none;
+   margin: 0;
+ }
+ 
+ header ul {
+  line-height: 400%;
  }
  
  li {
-   float: right;
-   margin: 0 10px;
+  float: right;
+  margin: 0 10px;
+  color: white;
  }
  
+  li a {
+  text-decoration: none;
+  color: white;
+ }
  

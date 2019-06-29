@@ -7,16 +7,34 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700 rel="stylesheet">
   </head>
 
   <body>
     <header>
       <ul>
-        <li>Top</li>
-        <li>About</li>
-        <li>Services</li>
+        <% if @current_user %>
+          <li><%= link_to("Post", "/posts/new") %></li>
+          <li><%= link_to("Posts", "/posts/index") %></li>
+          <li><%= link_to("Schedules", "/schedules/top") %></li>
+          <li><%= link_to("Schedule", "/schedules/new") %></li>
+          <li><%= link_to("Users", "/users/index") %></li>
+          <li><%= link_to("Sign out", "/logout", {method: :post}) %></li>
+          <li><%=  @current_user.name %></li>
+        <% else %>
+          <li><%= link_to("Top", "/") %></li>
+          <li><%= link_to("About", "/about") %></li>
+          <li><%= link_to("Sign up", "/users/new") %></li>
+          <li><%= link_to("Sign in", "/signin") %></li>
+        <% end %>
       </ul>
     </header>
+    <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

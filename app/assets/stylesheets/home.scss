@@ -1,15 +1,35 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+* {
+  box-sizing: border-box;
+}
+
 header {
   height: 64px;
-  background-color: slategray;
+  background-color: #222222;
+  color: white;
+}
+
+.container {
+  width: 1170px;
+}
+
+.top-main {
+  position: absolute;
+  padding: 200px 0 100px;
+  background-image: url("/ogasawara_ocean.jpg");
+  background-size: cover;
+  background-position: center 50%;
+  background-repeat: no-repeat;
+  min-height: 100%;
+  height: auto;
+  width: 100%;
+  color: white;
 }
 
 .top-message {
-  background-image: url("/ogasawara_ocean.jpg");
-  background-size: cover;
-  height: 1000px;
+  position: relative;
 }
 
 .top-message h2 {
@@ -21,4 +41,40 @@ header {
 .top-message p {
   text-align: center;
   font-size: 28px;
+}
+
+.schedule-wrapper {
+  width: 955px;
+}
+
+.schedule-wrapper ul {
+  padding-left: 0;
+}
+
+.about-message {
+  color: black;
+}
+
+.about-message li {
+  float: left;
+  color: black;
+  border: 1px solid black;
+  margin: 0;
+  padding: 0 70px;
+  width: 191px;
+}
+
+.schedule-space li {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.new-form textarea {
+  width: 200px;
+  height: 100px;
+}
+
+// post-index
+
+.posts-index p {
+  word-wrap: break-word;
 }

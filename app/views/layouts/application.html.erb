@@ -20,6 +20,7 @@
           <li><%= link_to("Schedules", "/schedules/top") %></li>
           <li><%= link_to("Schedule", "/schedules/new") %></li>
           <li><%= link_to("Users", "/users/index") %></li>
+          <li><%= link_to("Settings", "/settings/group") %></li>
           <li><%= link_to("Sign out", "/logout", {method: :post}) %></li>
           <li><%=  @current_user.name %></li>
         <% else %>

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get "settings/group" => "settings#group"
+  post "settings/group/new" => "settings#group_new"
+  post "settings/group/add_user" => "settings#add_self_to_group"
+  post "settings/group/remove_user" => "settings#remove_self_group"
+  
   post "logout" => "users#logout"
   get "signin" => "users#signin_form"
   post "signin" => "users#signin"

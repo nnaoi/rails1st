@@ -4,6 +4,14 @@ class ApplicationController < ActionController::Base
   
   def set_current_user
     @current_user = User.find_by(id: session[:user_id])
+    if @current_user
+      @current_belongto = BelongTo.find_by(user_id: @current_user.id)
+    end
+    if @current_belongto
+      @current_group = Group.find_by(id: @current_belongto.group_id)
+      @belongtos = BelongTo.where(group_id: @current_belongto.group_id)
+      @group_members = User.where(id: @belongtos.pluck("user_id"))
+    end
   end
   
   def authenticate_user

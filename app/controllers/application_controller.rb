@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     if @current_belongto
       @current_group = Group.find_by(id: @current_belongto.group_id)
       @belongtos = BelongTo.where(group_id: @current_belongto.group_id)
-      @group_members = User.where(id: @belongtos.pluck("user_id"))
+      @group_users = User.where(id: @belongtos.pluck("user_id"))
     end
   end
   
@@ -25,6 +25,12 @@ class ApplicationController < ActionController::Base
     if @current_user
       flash[:notice] = "すでにログインしています"
       redirect_to("/schedules/top")
+    end
+  end
+  
+  def authenticate_join
+    if !@current_belongto
+      redirect_to("/settings/group")
     end
   end
   

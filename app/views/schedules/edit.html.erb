@@ -1,0 +1,21 @@
+<%= form_tag("/schedules/#{@schedule.id}/update") do %>
+      <div class="form">
+        <div class="form-body">
+          <input type="datetime-local" name="start_time" value="<%= @schedule.start_time.strftime("%Y-%m-%dT%H:%M") %>">
+          <p>タイトル</p>
+          <textarea name="title"><%= @schedule.title %></textarea>
+          <p>概要</p>
+          <textarea name="abs"><%= @schedule.abs %></textarea>
+          <p>参加メンバー</p>
+          <% @group_users.each do |group_member| %>
+            <% schedule_member_ids = ScheduleMember.where(schedule_id: @schedule.id).pluck("user_id") %>
+            <% if schedule_member_ids.include?(group_member.id) %>  
+              <input type="checkbox" name="join_member_ids[]" value="<%= group_member.id %>" checked="checked"><%= group_member.name %>
+            <% else %>
+              <input type="checkbox" name="join_member_ids[]" value="<%= group_member.id %>"><%= group_member.name %>
+            <% end %>
+          <% end %>
+          <input type="submit" value="保存">
+        </div>
+      </div>
+    <% end %>

@@ -1,0 +1,2 @@
+class ScheduleMember < ApplicationRecord
+end

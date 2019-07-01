@@ -1,0 +1,4 @@
+<h1><%= "#{@current_group.name}のメンバー" %></h1>
+<% @group_users.each do |user| %>
+<p><%= user.name %></p>
+<% end %>

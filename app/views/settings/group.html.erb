@@ -1,0 +1,22 @@
+<% if @current_belongto %>
+  <h1>グループを抜ける</h1>
+  <%= link_to("抜ける", "/settings/group/remove_user", {method: "post"}) %>
+<% else %>
+  <h1>グループ追加</h1>
+  <div class="new-form">
+    <%= form_tag("/settings/group/new") do %>
+      <p>グループ名</p>
+      <input name="group_name">
+      <input type="submit", value="追加">
+    <% end %>
+  </div>
+  
+  <h1>グループに自分を追加</h1>
+  <div class="new-form">
+    <%= form_tag("/settings/group/add_user") do %>
+      <p>グループ名</p>
+      <input name="group_name">
+      <input type="submit", value="追加">
+    <% end %>
+  </div>
+<% end %>

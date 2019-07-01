@@ -1,0 +1,14 @@
+<div class="schedule-show-item">
+  <p>タイトル</p>
+  <%= "#{@schedule.start_time.strftime("%H:%M")} #{@schedule.title}" %>
+  <p>概要</p>
+  <%= @schedule.abs %>
+  <p>参加メンバー</p>
+  <% schedule_members = ScheduleMember.where(schedule_id: @schedule.id) %>
+  <% schedule_members.each do |schedule_member| %>
+    <% user = User.find_by(id: schedule_member.user_id) %>
+    <p><%= user.name %></p>
+  <% end %>
+  <%= link_to("編集する", "/schedules/#{@schedule.id}/edit") %>
+  <%= link_to("削除する", "/schedules/#{@schedule.id}/destroy", {method: "post"}) %>
+</div>

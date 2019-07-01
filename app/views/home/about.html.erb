@@ -1,0 +1,32 @@
+<div class="about-message">
+    <h2>タイトル</h2>
+    <p>ページ概要</p>
+    <div class="schedule-wrapper">
+        <ul>
+            <li><%= "#{@time.day}(#{%w(日 月 火 水 木 金 土)[@time.wday]})" %></li>
+            <li><%= "#{@time.day + 1}(#{%w(日 月 火 水 木 金 土)[(@time.wday + 1) % 7]})" %></li>
+            <li><%= "#{@time.day + 2}(#{%w(日 月 火 水 木 金 土)[(@time.wday + 2) % 7]})" %></li>
+            <li><%= "#{@time.day + 3}(#{%w(日 月 火 水 木 金 土)[(@time.wday + 3) % 7]})" %></li>
+            <li><%= "#{@time.day + 4}(#{%w(日 月 火 水 木 金 土)[(@time.wday + 4) % 7 ]})" %></li>
+        </ul>
+        <ul class="schedule-space">
+            <li>
+                <% @schedules.each do |schedule| %>
+                    <%= "#{schedule.start_time.hour}:#{schedule.start_time.min} #{schedule.title}" %>
+                <% end %>
+            </li>
+            <li>
+                
+            </li>
+            <li>
+                
+            </li>
+            <li>
+                
+            </li>
+            <li>
+                
+            </li>
+        </ul>
+    </div>
+</div>

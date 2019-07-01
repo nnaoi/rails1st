@@ -1,0 +1,16 @@
+<div class="new-form">
+  <h2>スケジュール追加</h2>
+  <%= form_tag("/schedules/create") do %>
+    <p>時刻</p>
+    <input type="datetime-local" name="datetime">
+    <p>タイトル</p>
+    <input name="title">
+    <p>概要</p>
+    <textarea name="abs"></textarea>
+    <p>参加メンバー</p>
+    <% @group_users.each do |group_member| %>
+      <input type="checkbox" name="join_member_ids[]" value="<%= group_member.id %>"><%= group_member.name %>
+    <% end %>
+    <input type="submit", value="送信">
+  <% end %>
+</div>

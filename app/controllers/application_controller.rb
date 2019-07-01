@@ -3,14 +3,16 @@ class ApplicationController < ActionController::Base
   before_action :set_current_user
   
   def set_current_user
-    @current_user = User.find_by(id: session[:user_id])
-    if @current_user
-      @current_belongto = BelongTo.find_by(user_id: @current_user.id)
-    end
-    if @current_belongto
-      @current_group = Group.find_by(id: @current_belongto.group_id)
-      @belongtos = BelongTo.where(group_id: @current_belongto.group_id)
-      @group_users = User.where(id: @belongtos.pluck("user_id"))
+    if session[:user_id]
+      @current_user = User.find_by(id: session[:user_id])
+      if @current_user
+        @current_belongto = BelongTo.find_by(user_id: @current_user.id)
+      end
+      if @current_belongto
+        @current_group = Group.find_by(id: @current_belongto.group_id)
+        @belongtos = BelongTo.where(group_id: @current_belongto.group_id)
+        @group_users = User.where(id: @belongtos.pluck("user_id"))
+      end
     end
   end
   

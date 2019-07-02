@@ -8,8 +8,8 @@ class SettingsController < ApplicationController
       flash[:notice] = "グループを追加しました"
       redirect_to("/settings/group")
     else
-      flash[:notice] = "既にそのグループ名は作成されています"
-      render("/settings/group")
+      flash[:notice] = "同名グループが存在しています。または、グループ名を空にすることはできません。"
+      redirect_to("/settings/group")
     end
   end
   

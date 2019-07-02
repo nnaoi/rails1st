@@ -14,13 +14,19 @@ class SettingsController < ApplicationController
   end
   
   def add_self_to_group
-    @belongto = BelongTo.new(group_id: Group.find_by(name: params[:group_name]).id, user_id:@current_user.id)
-    if @belongto.save
-      flash[:notice] = "グループに追加しました"
-      redirect_to("/settings/group")
+    @group = Group.find_by(name: params[:group_name])
+    if @group
+      @belongto = BelongTo.new(group_id: @group.id, user_id:@current_user.id)
+      if @belongto.save
+        flash[:notice] = "グループに追加しました"
+        redirect_to("/settings/group")
+      else
+        flash[:notice] = "既にグループ名は追加されています"
+        redirect_to("/settings/group")
+      end
     else
-      flash[:notice] = "既にグループ名は追加されています"
-      render("/settings/group")
+      flash[:notice] = "グループが存在しません。「グループ追加」からグループを追加してください。"
+      redirect_to("/settings/group")
     end
   end
   

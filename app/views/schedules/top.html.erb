@@ -1,6 +1,6 @@
 <div class="schedule-wrapper">
     <div class="form-inline date">
-        <%= form_tag("/schedules/date_update") do %>
+        <%= form_tag("/schedules/top") do %>
             <select name="year" class="form-control">
                 <% (1950..2050).each do |year| %>
                     <% if(year == @time.year) %>
@@ -54,6 +54,7 @@
                 <% @schedules.each do |schedule| %> 
                     <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
                         <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
+                        <br>
                     <% end %>
                 <% end %>
             </li>
@@ -61,6 +62,7 @@
                 <% @schedules2.each do |schedule| %>
                     <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
                         <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
+                        <br>
                     <% end %>
                 <% end %>
             </li>
@@ -68,6 +70,7 @@
                 <% @schedules3.each do |schedule| %>
                     <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
                         <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
+                        <br>
                     <% end %>
                 <% end %>
             </li>
@@ -75,6 +78,7 @@
                 <% @schedules4.each do |schedule| %>
                     <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
                         <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
+                        <br>
                     <% end %>
                 <% end %>
             </li>
@@ -82,6 +86,7 @@
                 <% @schedules5.each do |schedule| %>
                     <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
                         <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
+                        <br>
                     <% end %>
                 <% end %>
             </li>
@@ -89,6 +94,7 @@
                 <% @schedules6.each do |schedule| %>
                     <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
                         <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
+                        <br>
                     <% end %>
                 <% end %>
             </li>
@@ -96,10 +102,10 @@
                 <% @schedules7.each do |schedule| %>
                     <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
                         <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
+                        <br>
                     <% end %>
                 <% end %>
             </li>
-                
         <% end %>
     </ul>
 </div>

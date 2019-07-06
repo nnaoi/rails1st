@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get "about" => "home#about"
   
   get "schedules/top" => "schedules#top"
+  post "schedules/top" => "schedules#top"
   get "schedules/new" => "schedules#new"
   post "schedules/create" => "schedules#create"
   post "schedules/date_update" => "schedules#date_update"

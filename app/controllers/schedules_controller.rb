@@ -3,7 +3,11 @@ class SchedulesController < ApplicationController
   before_action :authenticate_join, {only: [:top, :new, :create, :show, :edit, :update, :date_update, :destroy]}
   
   def top
-    @time = Time.current
+    if params[:year] && params[:month] && params[:day]
+      @time = Time.zone.local(params[:year], params[:month], params[:day])
+    else
+      @time = Time.current
+    end
     @schedules = Schedule.where(start_time: Time.new(@time.year, @time.month, @time.day,0,0)..Time.new(@time.year, @time.month, @time.day, 23, 59))
     @schedules2 = Schedule.where(start_time: Time.new(@time.tomorrow.year, @time.tomorrow.month, @time.tomorrow.day,0,0)..Time.new(@time.tomorrow.year, @time.tomorrow.month, @time.tomorrow.day, 23, 59))
     @schedules3 = Schedule.where(start_time: Time.new(@time.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.day,0,0)..Time.new(@time.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.day, 23, 59))
@@ -51,18 +55,6 @@ class SchedulesController < ApplicationController
       @schedule_member.save
     end
     redirect_to("/schedules/top")
-  end
-  
-  def date_update
-    @time = Time.zone.local(params[:year], params[:month], params[:day])
-    @schedules = Schedule.where(start_time: Time.new(@time.year, @time.month, @time.day,0,0)..Time.new(@time.year, @time.month, @time.day, 23, 59))
-    @schedules2 = Schedule.where(start_time: Time.new(@time.tomorrow.year, @time.tomorrow.month, @time.tomorrow.day,0,0)..Time.new(@time.tomorrow.year, @time.tomorrow.month, @time.tomorrow.day, 23, 59))
-    @schedules3 = Schedule.where(start_time: Time.new(@time.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.day,0,0)..Time.new(@time.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.day, 23, 59))
-    @schedules4 = Schedule.where(start_time: Time.new(@time.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.day,0,0)..Time.new(@time.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.day, 23, 59))
-    @schedules5 = Schedule.where(start_time: Time.new(@time.tomorrow.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.tomorrow.day,0,0)..Time.new(@time.tomorrow.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.tomorrow.day, 23, 59))
-    @schedules6 = Schedule.where(start_time: Time.new(@time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.day,0,0)..Time.new(@time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.day, 23, 59))
-    @schedules7 = Schedule.where(start_time: Time.new(@time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.day,0,0)..Time.new(@time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.day, 23, 59))
-    render("schedules/top")
   end
   
   def destroy

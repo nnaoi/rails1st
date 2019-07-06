@@ -1,11 +1,19 @@
-<h1>サインイン</h1>
 <% if @error_message %>
   <%= @error_message %>
 <% end %>
-<%= form_tag("/signin") do %>
-  <p>メールアドレス</p>
-  <input name="email" value="<%= @email %>">
-  <p>パスワード</p>
-  <input type="password" name="password" value="<%= @password %>">
-  <input type="submit" value="Sign in">
-<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-md-3 mx-auto">
+      <div class="form-signin">
+        <%= form_tag("/signin") do %>
+          <div class="form-group">
+            <h1 class="h3 mb-3 font-weight-normal">サインイン</h1>
+            <input class="form-control" name="email" placeholder="メールアドレス" value="<%= @email %>" required autofocus>
+            <input type="password"  class="password form-control" name="password" placeholder="パスワード" value="<%= @password %>" required>
+            <input type="submit" class="btn btn-primary btn-block" value="Sign in">
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,21 +1,33 @@
-<%= form_tag("/schedules/#{@schedule.id}/update") do %>
-      <div class="form">
-        <div class="form-body">
-          <input type="datetime-local" name="start_time" value="<%= @schedule.start_time.strftime("%Y-%m-%dT%H:%M") %>">
-          <p>タイトル</p>
-          <textarea name="title"><%= @schedule.title %></textarea>
-          <p>概要</p>
-          <textarea name="abs"><%= @schedule.abs %></textarea>
-          <p>参加メンバー</p>
-          <% @group_users.each do |group_member| %>
-            <% schedule_member_ids = ScheduleMember.where(schedule_id: @schedule.id).pluck("user_id") %>
-            <% if schedule_member_ids.include?(group_member.id) %>  
-              <input type="checkbox" name="join_member_ids[]" value="<%= group_member.id %>" checked="checked"><%= group_member.name %>
-            <% else %>
-              <input type="checkbox" name="join_member_ids[]" value="<%= group_member.id %>"><%= group_member.name %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <h2>スケジュール編集</h2>
+      <%= form_tag("/schedules/#{@schedule.id}/update") do %>
+        <div class="form">
+          <div class="form-body">
+            <input type="datetime-local"  class="form-control" name="start_time" value="<%= @schedule.start_time.strftime("%Y-%m-%dT%H:%M") %>">
+            <p>タイトル</p>
+            <input  class="form-control" name="title" value="<%= @schedule.title %>">
+            <p>概要</p>
+            <textarea class="form-control" rows="5" name="abs"><%= @schedule.abs %></textarea>
+            <p>参加メンバー</p>
+            <% @group_users.each do |group_member| %>
+              <% schedule_member_ids = ScheduleMember.where(schedule_id: @schedule.id).pluck("user_id") %>
+              <div class="form-check form-check-inline">
+                <% if schedule_member_ids.include?(group_member.id) %>  
+                  <input type="checkbox" class="form-check-input" name="join_member_ids[]" value="<%= group_member.id %>" checked="checked">
+                <% else %>
+                  <input type="checkbox" class="form-check-input" name="join_member_ids[]" value="<%= group_member.id %>">
+                <% end %>
+                <label class="form-check-label">
+                  <%= group_member.name %>
+                </label>
+              </div>
             <% end %>
-          <% end %>
-          <input type="submit" value="保存">
+            <input type="submit" class="btn btn-primary btn-block" value="保存">
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

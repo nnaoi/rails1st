@@ -1,4 +1,6 @@
-<h1><%= "#{@current_group.name}のメンバー" %></h1>
-<% @group_users.each do |user| %>
-<p><%= user.name %></p>
-<% end %>
+<h2><%= "#{@current_group.name}グループのメンバー" %></h2>
+<ul class="list-group" style="max-width: 400px;">
+  <% @group_users.each do |user| %>
+    <li class="list-group-item"><%= user.name %></li>
+  <% end %>
+</ul>

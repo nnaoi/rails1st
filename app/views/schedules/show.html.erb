@@ -1,14 +1,31 @@
-<div class="schedule-show-item">
-  <p>タイトル</p>
-  <%= "#{@schedule.start_time.strftime("%H:%M")} #{@schedule.title}" %>
-  <p>概要</p>
-  <%= @schedule.abs %>
-  <p>参加メンバー</p>
-  <% schedule_members = ScheduleMember.where(schedule_id: @schedule.id) %>
-  <% schedule_members.each do |schedule_member| %>
-    <% user = User.find_by(id: schedule_member.user_id) %>
-    <p><%= user.name %></p>
-  <% end %>
-  <%= link_to("編集する", "/schedules/#{@schedule.id}/edit") %>
-  <%= link_to("削除する", "/schedules/#{@schedule.id}/destroy", {method: "post"}) %>
+<div class="container-fluid">
+  <table class="table table-hover">
+    <tbody>
+      <tr>
+        <td>タイトル</td>
+        <td><%= @schedule.title %></td>
+      </tr>
+      <tr>
+        <td>時刻</td>
+        <td><%= @schedule.start_time.strftime("%H:%M") %></td>
+      </tr>
+      <tr>
+        <td>概要</td>
+        <td><%= @schedule.abs %></td>
+      </tr>
+      <tr>
+        <td>参加メンバー</td>
+        <td>
+          <% schedule_members = ScheduleMember.where(schedule_id: @schedule.id) %>
+          <% schedule_members.each do |schedule_member| %>
+            <% user = User.find_by(id: schedule_member.user_id) %>
+            <span class="list-members"><%= user.name %></span>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+    <%= link_to("編集する", "/schedules/#{@schedule.id}/edit", {class: "btn btn-primary btn-block"}) %>
+    <%= link_to("削除する", "/schedules/#{@schedule.id}/destroy", {method: "post", class: "btn btn-danger btn-block"}) %>
+  </div>
 </div>

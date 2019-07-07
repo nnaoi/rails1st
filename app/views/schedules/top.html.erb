@@ -35,13 +35,9 @@
     </div>
     <ul class="schedule-number">
         <li>メンバー</li>
-        <li><%= "#{@time.day}(#{%w(日 月 火 水 木 金 土)[@time.wday]})" %></li>
-        <li><%= "#{@time.tomorrow.day}(#{%w(日 月 火 水 木 金 土)[@time.tomorrow.wday % 7]})" %></li>
-        <li><%= "#{@time.tomorrow.tomorrow.day}(#{%w(日 月 火 水 木 金 土)[@time.tomorrow.tomorrow.wday % 7]})" %></li>
-        <li><%= "#{@time.tomorrow.tomorrow.tomorrow.day}(#{%w(日 月 火 水 木 金 土)[@time.tomorrow.tomorrow.tomorrow.wday % 7]})" %></li>
-        <li><%= "#{@time.tomorrow.tomorrow.tomorrow.tomorrow.day}(#{%w(日 月 火 水 木 金 土)[@time.tomorrow.tomorrow.tomorrow.tomorrow.wday % 7 ]})" %></li>
-        <li><%= "#{@time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.day}(#{%w(日 月 火 水 木 金 土)[@time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.wday % 7 ]})" %></li>
-        <li><%= "#{@time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.day}(#{%w(日 月 火 水 木 金 土)[@time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.wday % 7 ]})" %></li>
+        <% (0..6).each do |num|%>
+            <li><%= "#{@time.since(num.days).day}(#{%w(日 月 火 水 木 金 土)[@time.since(num.days).wday % 7]})" %></li>
+        <% end %>
     </ul>
     <ul class="schedule-space">
         <% @group_users.each do |user_id| %>

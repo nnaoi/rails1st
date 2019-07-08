@@ -8,13 +8,14 @@ class SchedulesController < ApplicationController
     else
       @time = Time.current
     end
-    @schedules = Schedule.where(start_time: Time.new(@time.year, @time.month, @time.day,0,0)..Time.new(@time.year, @time.month, @time.day, 23, 59))
-    @schedules2 = Schedule.where(start_time: Time.new(@time.tomorrow.year, @time.tomorrow.month, @time.tomorrow.day,0,0)..Time.new(@time.tomorrow.year, @time.tomorrow.month, @time.tomorrow.day, 23, 59))
-    @schedules3 = Schedule.where(start_time: Time.new(@time.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.day,0,0)..Time.new(@time.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.day, 23, 59))
-    @schedules4 = Schedule.where(start_time: Time.new(@time.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.day,0,0)..Time.new(@time.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.day, 23, 59))
-    @schedules5 = Schedule.where(start_time: Time.new(@time.tomorrow.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.tomorrow.day,0,0)..Time.new(@time.tomorrow.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.tomorrow.day, 23, 59))
-    @schedules6 = Schedule.where(start_time: Time.new(@time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.day,0,0)..Time.new(@time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.day, 23, 59))
-    @schedules7 = Schedule.where(start_time: Time.new(@time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.day,0,0)..Time.new(@time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.year, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.month, @time.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.tomorrow.day, 23, 59))
+    @weekSchedules = []
+    (0..6).each do |scheduleNumber|
+      @weekSchedules.push(
+        Schedule.where(
+          start_time: Time.new(@time.since(scheduleNumber.days).year, @time.since(scheduleNumber.days).month, @time.since(scheduleNumber.days).day,0,0)..Time.new(@time.since(scheduleNumber.days).year, @time.since(scheduleNumber.days).month, @time.since(scheduleNumber.days).day, 23, 59)
+        )
+      )
+    end
   end
   
   def new

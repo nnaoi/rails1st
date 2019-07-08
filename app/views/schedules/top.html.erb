@@ -46,62 +46,16 @@
             <li>
                 <%= user.name %>
             </li>
-            <li>
-                <% @schedules.each do |schedule| %> 
-                    <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
-                        <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
-                        <br>
+            <% @weekSchedules.each do |schedules| %>
+                <li>
+                    <% schedules.each do |schedule| %>
+                        <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
+                            <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
+                            <br>
+                        <% end %>
                     <% end %>
-                <% end %>
-            </li>
-            <li>
-                <% @schedules2.each do |schedule| %>
-                    <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
-                        <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
-                        <br>
-                    <% end %>
-                <% end %>
-            </li>
-            <li>
-                <% @schedules3.each do |schedule| %>
-                    <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
-                        <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
-                        <br>
-                    <% end %>
-                <% end %>
-            </li>
-            <li>
-                <% @schedules4.each do |schedule| %>
-                    <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
-                        <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
-                        <br>
-                    <% end %>
-                <% end %>
-            </li>
-            <li>
-                <% @schedules5.each do |schedule| %>
-                    <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
-                        <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
-                        <br>
-                    <% end %>
-                <% end %>
-            </li>
-            <li>
-                <% @schedules6.each do |schedule| %>
-                    <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
-                        <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
-                        <br>
-                    <% end %>
-                <% end %>
-            </li>
-            <li>
-                <% @schedules7.each do |schedule| %>
-                    <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
-                        <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
-                        <br>
-                    <% end %>
-                <% end %>
-            </li>
+                 </li>   
+            <% end %>
         <% end %>
     </ul>
 </div>

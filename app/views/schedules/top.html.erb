@@ -3,7 +3,7 @@
         <%= form_tag("/schedules/top") do %>
             <select name="year" class="form-control">
                 <% (1950..2050).each do |year| %>
-                    <% if(year == @time.year) %>
+                    <% if year == @time.year %>
                         <option value="<%= year %>" selected><%= year %></option>
                     <% else %>
                         <option value="<%= year %>"><%= year %></option>
@@ -35,8 +35,8 @@
     </div>
     <ul class="schedule-number">
         <li>メンバー</li>
-        <% (0..6).each do |num|%>
-            <li><%= "#{@time.since(num.days).day}(#{%w(日 月 火 水 木 金 土)[@time.since(num.days).wday % 7]})" %></li>
+        <% @weekSchedules.each_with_index do |schedule, i|%>
+            <li><%= "#{@time.since(i.days).day}(#{%w(日 月 火 水 木 金 土)[@time.since(i.days).wday % 7]})" %></li>
         <% end %>
     </ul>
     <ul class="schedule-space">
@@ -54,7 +54,7 @@
                             <br>
                         <% end %>
                     <% end %>
-                 </li>   
+                </li>   
             <% end %>
         <% end %>
     </ul>

@@ -1,4 +1,4 @@
-<div class="schedule-wrapper">
+<div class="container-fluid">
     <div class="form-inline date">
         <%= form_tag("/schedules/top") do %>
             <select name="year" class="form-control">
@@ -33,29 +33,36 @@
             <input type="submit" class="form-control" value="更新">
         <% end %>
     </div>
-    <ul class="schedule-number">
-        <li>メンバー</li>
-        <% @weekSchedules.each_with_index do |schedule, i|%>
-            <li><%= "#{@time.since(i.days).day}(#{%w(日 月 火 水 木 金 土)[@time.since(i.days).wday % 7]})" %></li>
-        <% end %>
-    </ul>
-    <ul class="schedule-space">
-        <% @group_users.each do |user_id| %>
-            <% user = User.find_by(id: user_id) %>
-            
-            <li>
-                <%= user.name %>
-            </li>
-            <% @weekSchedules.each do |schedules| %>
-                <li>
-                    <% schedules.each do |schedule| %>
-                        <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
-                            <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
-                            <br>
-                        <% end %>
+    
+    <table class="table table-responsive table-bordered table-hover">
+        <thead>
+            <tr class="text-center">
+                <th scope="col">メンバー</th>
+                    <% @weekSchedules.each_with_index do |schedule, i|%>
+                        <th scope="col"><%= "#{@time.since(i.days).day}(#{%w(日 月 火 水 木 金 土)[@time.since(i.days).wday % 7]})" %></th>
                     <% end %>
-                </li>   
+            </tr>
+        </thead>
+        <tbody>
+            <% @group_users.each do |user_id| %>
+                <tr>
+                    <% user = User.find_by(id: user_id) %>
+                
+                    <th scope="col">
+                        <%= user.name %>
+                    </th>
+                    <% @weekSchedules.each do |schedules| %>
+                        <td>
+                            <% schedules.each do |schedule| %>
+                                <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
+                                    <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
+                                    <br>
+                                <% end %>
+                            <% end %>
+                        </td>   
+                    <% end %>    
+                </tr>
             <% end %>
-        <% end %>
-    </ul>
+        </tbody>
+    </table>
 </div>

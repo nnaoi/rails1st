@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
     <div class="form-inline date">
         <%= form_tag("/schedules/top") do %>
             <select name="year" class="form-control">
@@ -34,7 +34,7 @@
         <% end %>
     </div>
     
-    <table class="table table-responsive table-bordered table-hover">
+    <table class="table table-hover table-responsive text-nowrap table-bordered">
         <thead>
             <tr class="text-center">
                 <th scope="col">メンバー</th>
@@ -48,9 +48,9 @@
                 <tr>
                     <% user = User.find_by(id: user_id) %>
                 
-                    <th scope="col">
+                    <td>
                         <%= user.name %>
-                    </th>
+                    </td>
                     <% @weekSchedules.each do |schedules| %>
                         <td>
                             <% schedules.each do |schedule| %>

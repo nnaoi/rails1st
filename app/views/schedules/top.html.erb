@@ -37,7 +37,7 @@
     <table class="table table-hover table-responsive text-nowrap table-bordered">
         <thead>
             <tr class="text-center">
-                <th scope="col">メンバー</th>
+                <th class="fcloumn-sticky">メンバー</th>
                     <% @weekSchedules.each_with_index do |schedule, i|%>
                         <th scope="col"><%= "#{@time.since(i.days).day}(#{%w(日 月 火 水 木 金 土)[@time.since(i.days).wday % 7]})" %></th>
                     <% end %>
@@ -48,7 +48,7 @@
                 <tr>
                     <% user = User.find_by(id: user_id) %>
                 
-                    <td>
+                    <td class="fcolumn-sticky">
                         <%= user.name %>
                     </td>
                     <% @weekSchedules.each do |schedules| %>

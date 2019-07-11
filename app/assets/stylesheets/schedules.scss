@@ -23,3 +23,18 @@
 .list-members {
   margin-right:3px;
 }
+
+.fcolumn-sticky {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  left: 0;
+  background-color: ivory;
+}
+
+// .header-sticky {
+//   position: -webkit-sticky; /* Safari */
+//   position: sticky;
+//   top: 0;
+//   background-color: ivory;
+//   z-index: 10;
+// }

@@ -34,13 +34,13 @@
         <% end %>
     </div>
     
-    <table class="table table-hover table-responsive text-nowrap table-bordered">
+    <table class="table table-hover table-responsive text-nowrap table-bordered table-height">
         <thead>
             <tr class="text-center">
-                <th class="fcloumn-sticky">メンバー</th>
-                    <% @weekSchedules.each_with_index do |schedule, i|%>
-                        <th scope="col"><%= "#{@time.since(i.days).day}(#{%w(日 月 火 水 木 金 土)[@time.since(i.days).wday % 7]})" %></th>
-                    <% end %>
+                <th class="fcloumn-sticky"></th>
+                <% @weekSchedules.each_with_index do |schedule, i|%>
+                    <th scope="col" class="header-sticky"><%= "#{@time.since(i.days).day}(#{%w(日 月 火 水 木 金 土)[@time.since(i.days).wday % 7]})" %></th>
+                <% end %>
             </tr>
         </thead>
         <tbody>

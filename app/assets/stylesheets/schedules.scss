@@ -11,6 +11,10 @@
   margin-bottom: 10px;
 }
 
+.form-date > form > .form-group > * {
+  display: inline-block;
+}
+
 .container-fluid p {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -43,3 +47,4 @@
   height: 100vh;
   overflow: scroll
 }
+

@@ -1,36 +1,42 @@
 <div class="container-fluid">
     <div class="form-inline date">
         <%= form_tag("/schedules/top") do %>
-            <select name="year" class="form-control">
-                <% (1950..2050).each do |year| %>
-                    <% if year == @time.year %>
-                        <option value="<%= year %>" selected><%= year %></option>
-                    <% else %>
-                        <option value="<%= year %>"><%= year %></option>
+            <div class="form-group">
+                <select name="year" class="form-control input-sm form-control-sm" id="year">
+                    <% (1950..2050).each do |year| %>
+                        <% if year == @time.year %>
+                            <option value="<%= year %>" selected><%= year %></option>
+                        <% else %>
+                            <option value="<%= year %>"><%= year %></option>
+                        <% end %>
                     <% end %>
-                <% end %>
-            </select>　年
+                </select>
+                <label for="year">年</label>
+                
+                <select name="month" class="form-control input-sm form-control-sm" id="month">
+                    <% (1..12).each do |month| %>
+                        <% if month == @time.month %>
+                            <option value="<%= month %>" selected><%= month %></option>
+                        <% else %>
+                            <option value="<%= month %>"><%= month %></option>
+                        <% end %>
+                    <% end %>
+                </select>
+                <label for="month">月</label>
             
-            <select name="month" class="form-control">
-                <% (1..12).each do |month| %>
-                    <% if(month == @time.month) %>
-                        <option value="<%= month %>" selected><%= month %></option>
-                    <% else %>
-                        <option value="<%= month %>"><%= month %></option>
+                <select name="day" class="form-control input-sm form-control-sm" id="day">
+                    <% (1..31).each do |day| %>
+                        <% if day == @time.day %>
+                            <option value="<%= day %>" selected><%= day %></option>
+                        <% else %>
+                            <option value="<%= day %>"><%= day %></option>
+                        <% end %>
                     <% end %>
-                <% end %>
-            </select>　月
-            
-            <select name="day" class="form-control">
-                <% (1..31).each do |day| %>
-                    <% if(day == @time.day) %>
-                        <option value="<%= day %>" selected><%= day %></option>
-                    <% else %>
-                        <option value="<%= day %>"><%= day %></option>
-                    <% end %>
-                <% end %>
-            </select>　日
-            <input type="submit" class="form-control" value="更新">
+                </select>
+                <label for="day">日</label>
+                
+                <input type="submit" class="form-control form-control-sm" value="更新">
+            </div>
         <% end %>
     </div>
     

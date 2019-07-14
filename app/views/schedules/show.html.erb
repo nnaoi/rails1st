@@ -7,7 +7,7 @@
       </tr>
       <tr>
         <td>時刻</td>
-        <td><%= @schedule.start_time.strftime("%H:%M") %></td>
+        <td><%= "#{@schedule.start_time.strftime("%H:%M")}-#{@schedule.end_time.strftime("%H:%M")}" %></td>
       </tr>
       <tr>
         <td>概要</td>

@@ -5,7 +5,10 @@
       <%= form_tag("/schedules/#{@schedule.id}/update") do %>
         <div class="form">
           <div class="form-body">
+            <p>開始時刻</p>
             <input type="datetime-local"  class="form-control" name="start_time" value="<%= @schedule.start_time.strftime("%Y-%m-%dT%H:%M") %>">
+            <p>終了時刻</p>
+            <input type="time" class="form-control" name="end_time" value="<%= @schedule.end_time.strftime("%H:%M") %>">
             <p>タイトル</p>
             <input  class="form-control" name="title" value="<%= @schedule.title %>">
             <p>概要</p>

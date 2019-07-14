@@ -23,7 +23,10 @@ class SchedulesController < ApplicationController
   end
   
   def create
-    @schedule = Schedule.new(start_time: Time.zone.parse(params[:datetime]) , title: params[:title], abs: params[:abs])
+    start_time = Time.zone.parse(params[:datetime])
+    tmp = Time.zone.parse(params[:end_time])
+    end_time = Time.zone.local(start_time.year ,start_time.month ,start_time.day ,tmp.strftime("%H") ,tmp.strftime("%M"))
+    @schedule = Schedule.new(start_time: start_time ,end_time: end_time ,title: params[:title], abs: params[:abs])
     @schedule.save
     params[:join_member_ids].each do |join_member_id|
       @schedule_member = ScheduleMember.new(schedule_id: @schedule.id, user_id: join_member_id)

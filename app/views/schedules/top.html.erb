@@ -59,7 +59,9 @@
                         <td>
                             <% schedules.each do |schedule| %>
                                 <% if ScheduleMember.where(user_id: user.id).pluck("schedule_id").include?(schedule.id) %>
-                                    <%= link_to("#{schedule.start_time.strftime("%H:%M")} #{schedule.title}", "/schedules/#{schedule.id}") %>
+                                    <%= "#{schedule.start_time.strftime("%H:%M")}-#{schedule.end_time.strftime("%H:%M")}" %>
+                                    <br>
+                                    <%= link_to(schedule.title, "/schedules/#{schedule.id}") %>
                                     <br>
                                 <% end %>
                             <% end %>

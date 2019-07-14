@@ -4,3 +4,23 @@
 * {
   box-sizing: border-box;
 }
+
+/* top.html.erb */
+
+.top-main h2, .top-main p {
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+}
+
+.top-main {
+  background-color: #3ecdc6;
+  background-repeat: no-repeat;
+  background-position: center 50%;
+  background-size: cover;
+  background-image: url("/ogasawara_ocean.jpg");
+}
+
+.top-main .row {
+  padding-bottom: 10vh;
+}
+

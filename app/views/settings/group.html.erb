@@ -1,21 +1,23 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-12 col-xl-6">
-      <% if @current_belongto %>
-        <%= link_to("グループを抜ける", "/settings/group/remove_user", {method: "post", class: "btn btn-danger btn-block"}) %>
-      <% else %>
-        <h2>新しいグループを追加</h1>
-        <%= form_tag("/settings/group/new") do %>
-          <input class="form-control" name="group_name" placeholder="グループ名">
-          <input type="submit" class="btn btn-primary btn-block" value="追加">
+<div class="settings-group">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-xl-6">
+        <% if @current_belongto %>
+          <%= link_to("グループを抜ける", "/settings/group/remove_user", {method: "post", class: "btn btn-danger btn-block btn-leave-group"}) %>
+        <% else %>
+          <h2>新しいグループを追加</h2>
+          <%= form_tag("/settings/group/new") do %>
+            <input class="form-control" name="group_name" placeholder="グループ名">
+            <input type="submit" class="btn btn-primary btn-block" value="追加">
+          <% end %>
+          
+          <h2>グループに自分を追加</h2>
+          <%= form_tag("/settings/group/add_user") do %>
+            <input class="form-control" name="group_name" placeholder="グループ名">
+            <input type="submit" class="btn btn-primary btn-block" value="追加">
+          <% end %>
         <% end %>
-        
-        <h2>グループに自分を追加</h1>
-        <%= form_tag("/settings/group/add_user") do %>
-          <input class="form-control" name="group_name" placeholder="グループ名">
-          <input type="submit" class="btn btn-primary btn-block" value="追加">
-        <% end %>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>

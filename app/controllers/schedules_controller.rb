@@ -1,6 +1,6 @@
 class SchedulesController < ApplicationController
-  before_action :authenticate_user, {only: [:top, :new, :create, :show, :edit, :update, :date_update, :destroy]}
-  before_action :authenticate_join, {only: [:top, :new, :create, :show, :edit, :update, :date_update, :destroy]}
+  before_action :authenticate_user, {only: [:top, :new, :create, :show, :edit, :update, :destroy]}
+  before_action :authenticate_join, {only: [:top, :new, :create, :show, :edit, :update, :destroy]}
   
   def top
     if params[:year] && params[:month] && params[:day]

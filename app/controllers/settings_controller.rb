@@ -1,4 +1,6 @@
 class SettingsController < ApplicationController
+  before_action :authenticate_user, {only: [:group, :group_new, :add_self_to_group, :remove_self_group]}
+  
   def group
   end
   

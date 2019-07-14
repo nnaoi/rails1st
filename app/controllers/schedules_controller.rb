@@ -13,7 +13,7 @@ class SchedulesController < ApplicationController
       @weekSchedules.push(
         Schedule.where(
           start_time: Time.new(@time.since(scheduleNumber.days).year, @time.since(scheduleNumber.days).month, @time.since(scheduleNumber.days).day,0,0)..Time.new(@time.since(scheduleNumber.days).year, @time.since(scheduleNumber.days).month, @time.since(scheduleNumber.days).day, 23, 59)
-        )
+        ).order(:start_time)
       )
     end
   end

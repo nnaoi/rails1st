@@ -11,8 +11,16 @@
   margin-bottom: 10px;
 }
 
-.form-date > form > .form-group > * {
+.date > form > * {
   display: inline-block;
+}
+
+.date > form > select {
+  border-radius: 0.25em;
+}
+
+.btn-dark {
+  border-radius: 0.25em;
 }
 
 .container-fluid p {

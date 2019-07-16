@@ -1,3 +1,8 @@
+<% @schedule.errors.full_messages.each do |message| %>
+  <div class="alert alert-info">
+    <%= message %>
+  </div>
+<% end %>
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12 col-xl-6">

@@ -19,7 +19,7 @@ class SchedulesController < ApplicationController
   end
   
   def new
-    
+    @schedule = Schedule.new
   end
   
   def create
@@ -27,12 +27,15 @@ class SchedulesController < ApplicationController
     tmp = Time.zone.parse(params[:end_time])
     end_time = Time.zone.local(start_time.year ,start_time.month ,start_time.day ,tmp.strftime("%H") ,tmp.strftime("%M"))
     @schedule = Schedule.new(start_time: start_time ,end_time: end_time ,title: params[:title], abs: params[:abs])
-    @schedule.save
-    params[:join_member_ids].each do |join_member_id|
-      @schedule_member = ScheduleMember.new(schedule_id: @schedule.id, user_id: join_member_id)
-      @schedule_member.save
+    if @schedule.save
+      params[:join_member_ids].each do |join_member_id|
+        @schedule_member = ScheduleMember.new(schedule_id: @schedule.id, user_id: join_member_id)
+        @schedule_member.save
+      end
+      redirect_to("/schedules/top")
+    else
+      render("schedules/new")
     end
-    redirect_to("/schedules/top")
   end
   
   def show

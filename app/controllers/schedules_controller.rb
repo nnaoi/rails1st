@@ -49,19 +49,24 @@ class SchedulesController < ApplicationController
   def update
     @schedule = Schedule.find_by(id: params[:id])
     @schedule.title = params[:title]
-    @schedule.start_time = params[:start_time]
+    @schedule.start_time = Time.zone.parse(params[:start_time])
+    tmp = Time.zone.parse(params[:end_time])
+    @schedule.end_time = Time.zone.local(@schedule.start_time.year ,@schedule.start_time.month ,@schedule.start_time.day ,tmp.strftime("%H") ,tmp.strftime("%M"))
     @schedule.abs = params[:abs]
-    @schedule.save
-    before_schedule_members = ScheduleMember.where(schedule_id: @schedule.id)
-    after_schedule_member_ids = params[:join_member_ids]
-    before_schedule_members.each do |schedule_member|
-      schedule_member.destroy
+    if @schedule.save
+      before_schedule_members = ScheduleMember.where(schedule_id: @schedule.id)
+      after_schedule_member_ids = params[:join_member_ids]
+      before_schedule_members.each do |schedule_member|
+        schedule_member.destroy
+      end
+      after_schedule_member_ids.each do |user_id|
+        @schedule_member = ScheduleMember.new(user_id: user_id, schedule_id: @schedule.id)
+        @schedule_member.save
+      end
+      redirect_to("/schedules/top")
+    else
+      render("schedules/edit")
     end
-    after_schedule_member_ids.each do |user_id|
-      @schedule_member = ScheduleMember.new(user_id: user_id, schedule_id: @schedule.id)
-      @schedule_member.save
-    end
-    redirect_to("/schedules/top")
   end
   
   def destroy

@@ -9,13 +9,13 @@
       <h2>スケジュール作成</h2>
       <%= form_tag("/schedules/create") do %>
         <p>開始時刻</p>
-        <input type="datetime-local" class="form-control" name="datetime" >
+        <input type="datetime-local" class="form-control" name="datetime" value="<%= @schedule.start_time.strftime("%Y-%m-%dT%H:%M") if @schedule.start_time %>">
         <p>終了時刻</p>
-        <input type="time" class="form-control" name="end_time">
+        <input type="time" class="form-control" name="end_time" value="<%= @schedule.end_time.strftime("%H:%M") if @schedule.end_time %>">
         <p>タイトル</p>
-        <input class="form-control" name="title">
+        <input class="form-control" name="title" value="<%= @schedule.title %>">
         <p>概要</p>
-        <textarea class="form-control" rows="5" name="abs"></textarea>
+        <textarea class="form-control" rows="5" name="abs"><%= @schedule.abs %></textarea>
         <p>参加メンバー</p>
         <% @group_users.each do |group_member| %>
           <div class="form-check form-check-inline">

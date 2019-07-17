@@ -1,32 +1,20 @@
-<div class="about-message">
-    <h2>タイトル</h2>
-    <p>ページ概要</p>
-    <div class="schedule-wrapper">
-        <ul>
-            <li><%= "#{@time.day}(#{%w(日 月 火 水 木 金 土)[@time.wday]})" %></li>
-            <li><%= "#{@time.day + 1}(#{%w(日 月 火 水 木 金 土)[(@time.wday + 1) % 7]})" %></li>
-            <li><%= "#{@time.day + 2}(#{%w(日 月 火 水 木 金 土)[(@time.wday + 2) % 7]})" %></li>
-            <li><%= "#{@time.day + 3}(#{%w(日 月 火 水 木 金 土)[(@time.wday + 3) % 7]})" %></li>
-            <li><%= "#{@time.day + 4}(#{%w(日 月 火 水 木 金 土)[(@time.wday + 4) % 7 ]})" %></li>
-        </ul>
-        <ul class="schedule-space">
-            <li>
-                <% @schedules.each do |schedule| %>
-                    <%= "#{schedule.start_time.hour}:#{schedule.start_time.min} #{schedule.title}" %>
-                <% end %>
-            </li>
-            <li>
-                
-            </li>
-            <li>
-                
-            </li>
-            <li>
-                
-            </li>
-            <li>
-                
-            </li>
-        </ul>
+<div class="container">
+  <div class="h1">Group Schedulesとは</div>
+  <div class="lead">複数人（グループ）でのスケジュール管理を支援するWebサイトです。</div>
+  <div class="row">
+    <div class="card col-sm-12 col-md-6">
+      <img class="card-img-top" src="カレンダーアイコン8.png" alt="カードの画像">
+      <div class="card-body">
+        <h5 class="card-title">スケジュール管理</h5>
+        <p class="card-text">一週間単位のカレンダー形式で日程を表示します。</p>
+      </div>
     </div>
+    <div class="card col-sm-12 col-md-6">
+      <img class="card-img-top" src="グループ・メンバー.png" alt="カードの画像">
+      <div class="card-body">
+        <h5 class="card-title">グループでの管理</h5>
+        <p class="card-text">グループを作成し、友人や同僚を誘うことでグループ単位のスケジュール管理を可能にします。</p>
+      </div>
+    </div>
+  </div>
 </div>

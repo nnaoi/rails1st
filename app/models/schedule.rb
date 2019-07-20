@@ -5,7 +5,7 @@ class Schedule < ApplicationRecord
     
     def start_end_check
       unless self.start_time <= self.end_time
-        errors.add(:end_date, "の日付を正しく記入してください。")
+        errors[:base] << "終了時刻が不正です。"
       end
     end
 end

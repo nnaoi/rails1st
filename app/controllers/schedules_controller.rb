@@ -83,4 +83,7 @@ class SchedulesController < ApplicationController
     redirect_to("/schedules/top")
     flash[:notice] = "予定を削除しました。"
   end
+  
+  def update_error
+  end
 end

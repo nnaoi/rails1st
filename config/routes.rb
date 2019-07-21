@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   post "schedules/date_update" => "schedules#date_update"
   get "schedules/:id" => "schedules#show"
   get "schedules/:id/edit" => "schedules#edit"
+  # validation_error ---> Browser更新を行った際のエラー対処のため
+  get "schedules/:id/update" => "schedules#update_error"
   post "schedules/:id/update" => "schedules#update"
   post "schedules/:id/destroy" => "schedules#destroy"
   

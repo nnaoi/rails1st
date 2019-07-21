@@ -29,13 +29,16 @@ class SchedulesController < ApplicationController
     end_time = Time.zone.local(start_time.year ,start_time.month ,start_time.day ,tmp.strftime("%H") ,tmp.strftime("%M"))
     @schedule = Schedule.new(start_time: start_time ,end_time: end_time ,title: params[:title], abs: params[:abs])
     @join_member_ids = params[:join_member_ids]
-    if @schedule.save
+    if @join_member_ids && @schedule.save
       @join_member_ids.each do |join_member_id|
         @schedule_member = ScheduleMember.new(schedule_id: @schedule.id, user_id: join_member_id)
         @schedule_member.save
       end
       redirect_to("/schedules/top")
     else
+      unless @join_member_ids
+        @schedule.errors[:base] << "参加メンバーをチェックしてください。"
+      end
       render("schedules/new")
     end
   end
@@ -55,18 +58,21 @@ class SchedulesController < ApplicationController
     tmp = Time.zone.parse(params[:end_time])
     @schedule.end_time = Time.zone.local(@schedule.start_time.year ,@schedule.start_time.month ,@schedule.start_time.day ,tmp.strftime("%H") ,tmp.strftime("%M"))
     @schedule.abs = params[:abs]
-    if @schedule.save
-      before_schedule_members = ScheduleMember.where(schedule_id: @schedule.id)
-      after_schedule_member_ids = params[:join_member_ids]
+    before_schedule_members = ScheduleMember.where(schedule_id: @schedule.id)
+    @after_schedule_member_ids = params[:join_member_ids]
+    if @after_schedule_member_ids && @schedule.save
       before_schedule_members.each do |schedule_member|
         schedule_member.destroy
       end
-      after_schedule_member_ids.each do |user_id|
+      @after_schedule_member_ids.each do |user_id|
         @schedule_member = ScheduleMember.new(user_id: user_id, schedule_id: @schedule.id)
         @schedule_member.save
       end
       redirect_to("/schedules/top")
     else
+      unless @after_schedule_member_ids
+        @schedule.errors[:base] << "参加メンバーをチェックしてください。"
+      end
       render("schedules/edit")
     end
   end

@@ -1,6 +1,7 @@
 class Schedule < ApplicationRecord
     validates :start_time, {presence: true}
     validates :end_time, {presence: true}
+    validates :title, {presence: true}
     validate :start_end_check
     
     def start_end_check

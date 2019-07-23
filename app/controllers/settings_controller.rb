@@ -35,6 +35,14 @@ class SettingsController < ApplicationController
   def remove_self_group
     @belongto = BelongTo.find_by(user_id: @current_user.id)
     @belongto.destroy
+    @scheduleMembers = ScheduleMember.where(user_id: @current_user.id)
+    @scheduleMembers.each do |scheduleMember|
+      scheduleMember.destroy
+      unless ScheduleMember.where(schedule_id: scheduleMember.schedule_id)
+        schedule = Schedule.find_by(id: scheduleMember.schedule_id)
+        schedule.destroy
+      end
+    end
     redirect_to("/settings/group")
     flash[:notice] = "グループを抜けました。"
   end

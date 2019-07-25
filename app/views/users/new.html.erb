@@ -5,9 +5,9 @@
         <%= form_tag("/users/create") do %>
           <div class="form-group">
             <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
-            <input class="form-control" name="name" placeholder="名前" required autofocus>
-            <input class="form-control" name="email" placeholder="メールアドレス" required>
-            <input type="password"  class="password form-control" name="password" placeholder="パスワード" required>
+            <input class="form-control" name="name" placeholder="名前" value="<%= @user.name %>" required autofocus>
+            <input class="form-control" name="email" placeholder="メールアドレス" value="<%= @user.email %>" required>
+            <input type="password"  class="password form-control" name="password" placeholder="パスワード" value="<%= @user.password %>" required>
             <input type="submit" class="btn btn-primary btn-block" value="Sign up">
           </div>
         <% end %>

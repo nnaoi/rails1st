@@ -16,9 +16,17 @@ class UsersController < ApplicationController
       email: params[:email],
       password: params[:password]
     )
-    @user.save
-    session[:user_id] = @user.id
-    redirect_to("/settings/group")
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to("/settings/group")
+    else
+      flash[:danger] = "既にそのメールアドレスは使用されています。"
+      render("/users/new")
+    end
+  end
+  
+  def create_refresh
+    redirect_to("/signup")
   end
   
   def logout

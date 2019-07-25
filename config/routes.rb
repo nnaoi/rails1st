@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   post "schedules/:id/destroy" => "schedules#destroy"
   
   get "users/index" => "users#index"
-  get "users/new" => "users#new"
+  get "signup" => "users#new"
   post "users/create" => "users#create"
   
 end

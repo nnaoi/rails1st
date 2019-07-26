@@ -12,7 +12,7 @@
         </tr>
         <tr>
           <td>概要</td>
-          <td><%= simple_format(@schedule.abs) %></td>
+          <td><%= safe_join(@schedule.abs.split("\n"), tag(:br)) %></td>
         </tr>
         <tr>
           <td>参加メンバー</td>

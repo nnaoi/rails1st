@@ -23,9 +23,9 @@
               <% schedule_member_ids = ScheduleMember.where(schedule_id: @schedule.id).pluck("user_id") %>
               <div class="form-check form-check-inline">
                 <% if schedule_member_ids.include?(group_member.id) %>  
-                  <input type="checkbox" class="form-check-input" name="join_member_ids[]" value="<%= group_member.id %>" checked="checked">
+                  <input type="checkbox" class="form-check-input" name="schedule_memder_ids[]" value="<%= group_member.id %>" checked="checked">
                 <% else %>
-                  <input type="checkbox" class="form-check-input" name="join_member_ids[]" value="<%= group_member.id %>">
+                  <input type="checkbox" class="form-check-input" name="schedule_memder_ids[]" value="<%= group_member.id %>">
                 <% end %>
                 <label class="form-check-label">
                   <%= group_member.name %>

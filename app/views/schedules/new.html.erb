@@ -19,10 +19,10 @@
         <p>参加メンバー</p>
         <% @group_users.each do |group_member| %>
           <div class="form-check form-check-inline">
-            <% if @join_member_ids && @join_member_ids.include?(group_member.id.to_s) %> <!-- TODO: くそコード:to_sで無理やり型合わせている-->
-              <input type="checkbox" class="form-check-input" name="join_member_ids[]" value="<%= group_member.id %>" checked="checked">
+            <% if @schedule_memder_ids && @schedule_memder_ids.include?(group_member.id.to_s) %> <!-- TODO: くそコード:to_sで無理やり型合わせている-->
+              <input type="checkbox" class="form-check-input" name="schedule_memder_ids[]" value="<%= group_member.id %>" checked="checked">
             <% else %>
-              <input type="checkbox" class="form-check-input" name="join_member_ids[]" value="<%= group_member.id %>">
+              <input type="checkbox" class="form-check-input" name="schedule_memder_ids[]" value="<%= group_member.id %>">
             <% end %>
             <label class="form-check-label"><%= group_member.name %></label>
           </div>

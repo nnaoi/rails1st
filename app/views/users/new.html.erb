@@ -1,3 +1,8 @@
+<% @user.errors.full_messages.each do |message| %>
+  <div class="alert alert-danger">
+    <%= message %>
+  </div>
+<% end %>
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12 col-xl-3 mx-auto">

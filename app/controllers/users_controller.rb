@@ -22,7 +22,6 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to("/settings/group")
     else
-      flash[:danger] = "既にそのメールアドレスは使用されています。"
       render("/users/new")
     end
   end

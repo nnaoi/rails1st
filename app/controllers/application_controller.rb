@@ -35,8 +35,5 @@ class ApplicationController < ActionController::Base
       redirect_to("/settings/group")
     end
   end
-  
-  def hello
-    render html: "hello, world!"
-  end
+
 end

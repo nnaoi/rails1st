@@ -6,10 +6,12 @@ class UsersController < ApplicationController
      @users = User.all
   end
   
+  # ユーザ新規作成
   def new
     @user = User.new
   end
   
+  # ユーザ新規作成
   def create
     @user = User.new(
       name: params[:name],
@@ -25,6 +27,7 @@ class UsersController < ApplicationController
     end
   end
   
+  # バリデーションエラー→getリクエスト対応
   def create_refresh
     redirect_to("/signup")
   end

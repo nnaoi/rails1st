@@ -20,10 +20,9 @@ Rails.application.routes.draw do
   post "schedules/top" => "schedules#top"
   get "schedules/new" => "schedules#new"
   post "schedules/create" => "schedules#create"
-  post "schedules/date_update" => "schedules#date_update"
   get "schedules/:id" => "schedules#show"
   get "schedules/:id/edit" => "schedules#edit"
-  # validation_error ---> Browser更新を行った際のエラー対処のため
+  # validation_error ---> バリデーションエラーが起きた際、getリクエストに対応するた
   get "schedules/:id/update" => "schedules#update_error"
   post "schedules/:id/update" => "schedules#update"
   post "schedules/:id/destroy" => "schedules#destroy"

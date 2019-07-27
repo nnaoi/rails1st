@@ -2,6 +2,7 @@ class SchedulesController < ApplicationController
   before_action :authenticate_user, {only: [:top, :new, :create, :show, :edit, :update, :destroy]}
   before_action :authenticate_join, {only: [:top, :new, :create, :show, :edit, :update, :destroy]}
   
+  # スケジュール一覧取得
   def top
     if params[:year] && params[:month] && params[:day]
       @time = Time.zone.local(params[:year], params[:month], params[:day])
@@ -9,7 +10,9 @@ class SchedulesController < ApplicationController
       @time = Time.current
     end
     @weekSchedules = []
-    (0..6).each do |scheduleNumber|
+    # スケジュールを何日分表示するか。 ex.) 10日分:(0..9)
+    displayed_number = (0..6)
+    displayed_number.each do |scheduleNumber|
       @weekSchedules.push(
         Schedule.where(
           start_time: Time.zone.local(@time.since(scheduleNumber.days).year, @time.since(scheduleNumber.days).month, @time.since(scheduleNumber.days).day,0,0)..Time.new(@time.since(scheduleNumber.days).year, @time.since(scheduleNumber.days).month, @time.since(scheduleNumber.days).day, 23, 59)
@@ -18,20 +21,25 @@ class SchedulesController < ApplicationController
     end
   end
   
+  # スケジュール新規作成
   def new
     @schedule = Schedule.new
     @schedule_memder_ids = []
   end
   
+  # スケジュール新規作成
   def create
+    # Scheduleモデルに関する処理
     start_time = Time.zone.parse(params[:datetime])
     tmp = Time.zone.parse(params[:end_time])
     end_time = Time.zone.local(start_time.year ,start_time.month ,start_time.day ,tmp.strftime("%H") ,tmp.strftime("%M"))
     @schedule = Schedule.new(start_time: start_time ,end_time: end_time ,title: params[:title], abs: params[:abs])
     @schedule_memder_ids = params[:schedule_memder_ids]
+    
+    # ScheeduleMemberモデルに関する処理
     if @schedule_memder_ids && @schedule.save
-      @schedule_memder_ids.each do |join_member_id|
-        @schedule_member = ScheduleMember.new(schedule_id: @schedule.id, user_id: join_member_id)
+      @schedule_memder_ids.each do |schedule_member_id|
+        @schedule_member = ScheduleMember.new(schedule_id: @schedule.id, user_id: schedule_member_id)
         @schedule_member.save
       end
       redirect_to("/schedules/top")
@@ -43,14 +51,17 @@ class SchedulesController < ApplicationController
     end
   end
   
+  # スケジュール詳細を表示
   def show
     @schedule = Schedule.find_by(id: params[:id])
   end
   
+  # スケジュールを編集
   def edit
     @schedule = Schedule.find_by(id: params[:id])
   end
   
+  # スケジュールを編集
   def update
     @schedule = Schedule.find_by(id: params[:id])
     @schedule.title = params[:title]
@@ -77,6 +88,7 @@ class SchedulesController < ApplicationController
     end
   end
   
+  # スケジュールを削除
   def destroy
     @schedule = Schedule.find_by(id: params[:id])
     @schedule.destroy
@@ -84,6 +96,9 @@ class SchedulesController < ApplicationController
     flash[:notice] = "予定を削除しました。"
   end
   
+  # 不正な操作が行われたとき、「トップへ」ボタンを表示
+  # バリデーションエラーが起きた際、getリクエストに対応するために必要
+  # https://teratail.com/questions/95970
   def update_error
   end
 end

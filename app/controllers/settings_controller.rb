@@ -1,9 +1,11 @@
 class SettingsController < ApplicationController
   before_action :authenticate_user, {only: [:group, :group_new, :add_self_to_group, :remove_self_group]}
   
+  # グループ設定
   def group
   end
   
+  # グループ新規作成
   def group_new
     @group = Group.new(name: params[:group_name])
     if @group.save
@@ -15,6 +17,7 @@ class SettingsController < ApplicationController
     end
   end
   
+  # グループに自分を追加
   def add_self_to_group
     @group = Group.find_by(name: params[:group_name])
     if @group
@@ -32,6 +35,7 @@ class SettingsController < ApplicationController
     end
   end
   
+  # グループを抜ける
   def remove_self_group
     @belongto = BelongTo.find_by(user_id: @current_user.id)
     @belongto.destroy

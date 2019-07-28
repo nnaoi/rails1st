@@ -9,10 +9,6 @@ Rails.application.routes.draw do
   get "signin" => "users#signin_form"
   post "signin" => "users#signin"
   
-  get "posts/index" => "posts#index"
-  get "posts/new" => "posts#new"
-  post "posts/create" => "posts#create"
-  
   get "/" => "home#top"
   get "about" => "home#about"
   
@@ -27,8 +23,7 @@ Rails.application.routes.draw do
   post "schedules/:id/update" => "schedules#update"
   post "schedules/:id/destroy" => "schedules#destroy"
   
-  get "users/index" => "users#index"
   get "signup" => "users#new"
-  get "users/create" => "users#create_refresh"
+  get "users/create" => "users#new"
   post "users/create" => "users#create"
 end

@@ -42,12 +42,14 @@ class SchedulesController < ApplicationController
         @schedule_member = ScheduleMember.new(schedule_id: @schedule.id, user_id: schedule_member_id)
         @schedule_member.save
       end
+      session[:schedule] = nil
       redirect_to("/schedules/top")
     else
       unless @schedule_memder_ids
         @schedule.errors[:base] << "参加メンバーをチェックしてください。"
       end
-      render("schedules/new")
+      session[:schedule] = @schedule.attributes.slice(*params.keys)
+      redirect_to("/schedules/new")
     end
   end
   
@@ -93,7 +95,7 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.find_by(id: params[:id])
     @schedule.destroy
     redirect_to("/schedules/top")
-    flash[:notice] = "予定を削除しました。"
+    flash[:primary] = "予定を削除しました。"
   end
   
   # 不正な操作が行われたとき、「トップへ」ボタンを表示

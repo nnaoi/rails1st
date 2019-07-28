@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   
   # ユーザ新規作成
   def new
-    @user = User.new
+    @user = User.new(session[:user] || {})
   end
   
   # ユーザ新規作成
@@ -20,9 +20,12 @@ class UsersController < ApplicationController
     )
     if @user.save
       session[:user_id] = @user.id
+      session[:user] = nil
       redirect_to("/settings/group")
     else
-      render("/users/new")
+      session[:user] = @user.attributes.slice(*params.keys)
+      flash[:danger] = @user.errors.full_messages
+      redirect_to("/signup")
     end
   end
   
@@ -33,25 +36,26 @@ class UsersController < ApplicationController
   
   def logout
     session[:user_id] = nil
-    flash[:notice] = "ログアウトしました"
+    flash[:primary] = "ログアウトしました"
     redirect_to("/")
   end
   
   def signin_form
-    
+    @user = User.new(session[:user] || {})
   end
   
   def signin
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      flash[:notice] = "ログインしました"
+      session[:user] = nil
+      flash[:primary] = "ログインしました"
       redirect_to("/schedules/top")
     else
-      @error_message = "メールアドレスまたはパスワードが間違っています"
-      @email = params[:email]
-      @password = params[:password]
-      render("users/signin_form")
+      @user = User.new(email: params[:email])
+      flash[:danger] = "メールアドレスまたはパスワードが間違っています"
+      session[:user] = @user.attributes.slice(*params.keys)
+      redirect_to("/signin")
     end
   end
 end

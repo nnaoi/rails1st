@@ -10,8 +10,8 @@
         <%= form_tag("/signin") do %>
           <div class="form-group">
             <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
-            <input class="form-control" name="email" placeholder="メールアドレス" value="<%= @email %>" required autofocus>
-            <input type="password"  class="password form-control" name="password" placeholder="パスワード" value="<%= @password %>" required>
+            <input class="form-control" name="email" placeholder="メールアドレス" value="<%= @user.email %>" required autofocus>
+            <input type="password"  class="password form-control" name="password" placeholder="パスワード" value="<%= @user.password %>" required>
             <input type="submit" class="btn btn-primary btn-block" value="Sign in">
           </div>
         <% end %>

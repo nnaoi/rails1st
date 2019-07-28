@@ -9,10 +9,10 @@ class SettingsController < ApplicationController
   def group_new
     @group = Group.new(name: params[:group_name])
     if @group.save
-      flash[:notice] = "グループを追加しました"
+      flash[:primary] = "グループを追加しました"
       redirect_to("/settings/group")
     else
-      flash[:notice] = "同名グループが存在しています。または、グループ名を空にすることはできません。"
+      flash[:danger] = "同名グループが存在しています。または、グループ名を空にすることはできません。"
       redirect_to("/settings/group")
     end
   end
@@ -23,14 +23,14 @@ class SettingsController < ApplicationController
     if @group
       @belongto = BelongTo.new(group_id: @group.id, user_id:@current_user.id)
       if @belongto.save
-        flash[:notice] = "グループに追加しました"
+        flash[:primary] = "グループに追加しました"
         redirect_to("/settings/group")
       else
-        flash[:notice] = "既にグループ名は追加されています"
+        flash[:danger] = "既にグループ名は追加されています"
         redirect_to("/settings/group")
       end
     else
-      flash[:notice] = "グループが存在しません。「グループ追加」からグループを追加してください。"
+      flash[:danger] = "グループが存在しません。「グループ追加」からグループを追加してください。"
       redirect_to("/settings/group")
     end
   end
@@ -48,6 +48,6 @@ class SettingsController < ApplicationController
       end
     end
     redirect_to("/settings/group")
-    flash[:notice] = "グループを抜けました。"
+    flash[:primary] = "グループを抜けました。"
   end
 end

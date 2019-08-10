@@ -18,8 +18,6 @@ Rails.application.routes.draw do
   post "schedules/create" => "schedules#create"
   get "schedules/:id" => "schedules#show"
   get "schedules/:id/edit" => "schedules#edit"
-  # validation_error ---> バリデーションエラーが起きた際、getリクエストに対応するた
-  get "schedules/:id/update" => "schedules#update_error"
   post "schedules/:id/update" => "schedules#update"
   post "schedules/:id/destroy" => "schedules#destroy"
   

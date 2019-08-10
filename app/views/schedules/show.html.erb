@@ -1,42 +1,31 @@
-<% if @schedule %>
-  <div class="container-fluid">
-    <table class="table table-hover">
-      <tbody>
-        <tr>
-          <td>タイトル</td>
-          <td><%= @schedule.title %></td>
-        </tr>
-        <tr>
-          <td>時刻</td>
-          <td><%= "#{@schedule.start_time.strftime("%H:%M")}-#{@schedule.end_time.strftime("%H:%M")}" %></td>
-        </tr>
-        <tr>
-          <td>概要</td>
-          <td><%= safe_join(@schedule.abs.split("\n"), tag(:br)) %></td>
-        </tr>
-        <tr>
-          <td>参加メンバー</td>
-          <td>
-            <% schedule_members = ScheduleMember.where(schedule_id: @schedule.id) %>
-            <% schedule_members.each do |schedule_member| %>
-              <% user = User.find_by(id: schedule_member.user_id) %>
-              <span class="list-members"><%= user.name %></span>
-            <% end %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-      <%= link_to("編集する", "/schedules/#{@schedule.id}/edit", {class: "btn btn-primary btn-block"}) %>
-      <%= link_to("削除する", "/schedules/#{@schedule.id}/destroy", {method: "post", class: "btn btn-danger btn-block"}) %>
-    </div>
+<div class="container-fluid">
+  <table class="table table-hover">
+    <tbody>
+      <tr>
+        <td>タイトル</td>
+        <td><%= @schedule.title %></td>
+      </tr>
+      <tr>
+        <td>時刻</td>
+        <td><%= "#{@schedule.start_time.strftime("%H:%M")}-#{@schedule.end_time.strftime("%H:%M")}" %></td>
+      </tr>
+      <tr>
+        <td>概要</td>
+        <td><%= safe_join(@schedule.abs.split("\n"), tag(:br)) %></td>
+      </tr>
+      <tr>
+        <td>参加メンバー</td>
+        <td>
+          <% schedule_members = ScheduleMember.where(schedule_id: @schedule.id) %>
+          <% schedule_members.each do |schedule_member| %>
+            <% user = User.find_by(id: schedule_member.user_id) %>
+            <span class="list-members"><%= user.name %></span>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+    <%= link_to("編集する", "/schedules/#{@schedule.id}/edit", {class: "btn btn-primary btn-block"}) %>
+    <%= link_to("削除する", "/schedules/#{@schedule.id}/destroy", {method: "post", class: "btn btn-danger btn-block"}) %>
   </div>
-<% else %>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12 col-xl-6">
-        <p class="lead">不正な操作が行われました。</p>
-        <%= link_to("トップへ", "/schedules/top", {class: "btn btn-primary btn-block"}) %>
-      </div>
-    </div>
-  </div>
-<% end %>
+</div>

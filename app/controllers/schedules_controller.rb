@@ -68,8 +68,8 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.find_by(id: params[:id])
     @schedule_member_ids = ScheduleMember.where(schedule_id: @schedule.id).pluck("user_id")
     if session[:schedule]
-      session[:schedule].each do |key, value|
-        @schedule.send("#{key}=", value)
+      session[:schedule].each do |attribute, value|
+        @schedule.send("#{attribute}=", value)
       end
     end
     if session[:schedule_member_ids]
